@@ -58,6 +58,23 @@
         .pop-in {
             animation: popIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+        /* 매트 레이어 펼쳐짐 애니메이션 */
+        @keyframes matDeploy {
+            0% {
+                opacity: 0;
+                transform: translateY(-16px) scale(0.94);
+            }
+            60% {
+                transform: translateY(2px) scale(1.01);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .mat-deploy {
+            animation: matDeploy 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.2) forwards;
+        }
     </style>
 </head>
 <body class="text-tq-charcoal antialiased selection:bg-tq-orange selection:text-white">
@@ -99,11 +116,6 @@
                         class="w-full h-auto object-cover block"
                         onerror="this.onerror=null; this.src='https://placehold.co/400x600/FF6B00/FFFFFF?text=Camping+School';"
                     />
-                    <!-- 이미지 터치 안내 오버레이 -->
-                    <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-5 text-center text-white">
-                        <p class="text-xs font-bold text-yellow-300 mb-1">🏕️ 2026 자라섬캠핑장 캠핑스쿨</p>
-                        <p class="text-sm font-extrabold">화면을 눌러 교보재를 시작해보세요!</p>
-                    </div>
                 </div>
 
                 <!-- 캠핑스쿨 시작하기 CTA 버튼 -->
@@ -150,40 +162,42 @@
                 </button>
             </header>
 
-            <!-- 히어로 타이틀 배너 (PDF 제안서 타이틀 반영) -->
-            <section class="bg-gradient-to-br from-[#FF7B1C] via-[#FF6B00] to-[#E05200] text-white px-5 pt-6 pb-6 rounded-b-[28px] shadow-md relative overflow-hidden">
-                <div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-white/10 pointer-events-none"></div>
-                <div class="absolute right-6 bottom-3 w-14 h-14 rounded-full bg-white/10 pointer-events-none"></div>
+            <!-- 히어로 타이틀 배너 (시안 이미지 배경 음영 처리) -->
+            <section class="relative text-white px-5 pt-6 pb-6 rounded-b-[28px] shadow-md overflow-hidden bg-cover bg-center" style="background-image: url('https://i.postimg.cc/bv2V32Gh/seukeulinsyas-2026-10-30-172607.png');">
+                <!-- 불필요한 오렌지 틴트를 제거하고, 이미지 원본 색감 유지 + 텍스트 가독성을 위한 블랙 딤드 음영만 적용 -->
+                <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80"></div>
 
-                <div class="inline-flex flex-wrap items-center gap-1.5 bg-black/20 px-3 py-1 rounded-full text-xs font-semibold mb-3">
-                    <span>🏕️ 2026. 11. 7.(토) ~ 11. 8.(일)</span>
-                    <span>·</span>
-                    <span>가평 자라섬캠핑장</span>
-                </div>
-
-                <h1 class="text-2xl sm:text-[26px] leading-snug font-black tracking-tight mb-2">
-                    자라섬캠핑장 캠핑스쿨
-                </h1>
-                <p class="text-sm text-orange-50 font-medium leading-relaxed mb-4">
-                    캠핑을 배우고, 가평에 머물며, 지역을 경험하는 1박 2일!<br/>
-                    초등학생도 쉽게 따라 하는 텐트 설치 &amp; 안전캠핑 가이드
-                </p>
-
-                <!-- 학습 진도율 카드 -->
-                <div class="bg-white/15 backdrop-blur-sm rounded-2xl p-3.5 border border-white/20">
-                    <div class="flex justify-between items-center text-xs font-extrabold mb-1.5 gap-2">
-                        <span class="flex items-center gap-1.5">
-                            <span>🏅</span>
-                            <span>나의 캠핑스쿨 학습률</span>
-                        </span>
-                        <span id="progressText" class="bg-white/20 px-2 py-0.5 rounded-full whitespace-nowrap">0% 완료</span>
+                <div class="relative z-10">
+                    <div class="inline-flex flex-wrap items-center gap-1.5 bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold mb-3 border border-white/20">
+                        <span>🏕️ 2026. 11. 7.(토) ~ 11. 8.(일)</span>
+                        <span>·</span>
+                        <span>가평 자라섬캠핑장</span>
                     </div>
-                    <div class="w-full h-2.5 bg-black/20 rounded-full overflow-hidden">
-                        <div id="progressBar" class="h-full bg-yellow-300 rounded-full transition-all duration-500 w-0"></div>
-                    </div>
-                    <p class="text-[11px] text-orange-50 mt-2 leading-snug">
-                        💡 각 주제의 <strong>[배웠어요 / 약속해요]</strong> 버튼을 눌러 100%를 채워보세요!
+
+                    <h1 class="text-2xl sm:text-[26px] leading-snug font-black tracking-tight mb-2 drop-shadow-md">
+                        자라섬캠핑장 캠핑스쿨
+                    </h1>
+                    <p class="text-xs sm:text-sm text-gray-100 font-medium leading-relaxed mb-4 drop-shadow-md">
+                        캠핑을 배우고, 가평에 머물며, 지역을 경험하는 1박 2일!<br/>
+                        초등학생도 쉽게 따라 하는 텐트 설치 &amp; 안전캠핑 가이드
                     </p>
+
+                    <!-- 학습 진도율 카드 -->
+                    <div class="bg-black/40 backdrop-blur-md rounded-2xl p-3.5 border border-white/20 shadow-sm">
+                        <div class="flex justify-between items-center text-xs font-extrabold mb-1.5 gap-2">
+                            <span class="flex items-center gap-1.5">
+                                <span>🏅</span>
+                                <span>나의 캠핑스쿨 학습률</span>
+                            </span>
+                            <span id="progressText" class="bg-white/20 px-2 py-0.5 rounded-full whitespace-nowrap">0% 완료</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-black/50 rounded-full overflow-hidden">
+                            <div id="progressBar" class="h-full bg-yellow-400 rounded-full transition-all duration-500 w-0"></div>
+                        </div>
+                        <p class="text-[11px] text-gray-200 mt-2 leading-snug">
+                            💡 각 주제의 <strong class="text-white">[배웠어요 / 약속해요]</strong> 버튼을 눌러 100%를 채워보세요!
+                        </p>
+                    </div>
                 </div>
             </section>
 
@@ -236,8 +250,9 @@
                                 <span class="w-7 h-7 rounded-xl bg-tq-orange text-white font-extrabold text-sm flex items-center justify-center shrink-0">1</span>
                                 <h3 class="text-base sm:text-lg font-extrabold text-gray-900">어떤 텐트들이 있을까요?</h3>
                             </div>
-                            <button type="button" onclick="toggleComplete('step1', this)" class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-bold whitespace-nowrap shrink-0 transition active:scale-95">
-                                ✓ 배웠어요
+                            <button type="button" onclick="toggleComplete('step1', this)" class="px-3.5 py-2 rounded-xl bg-orange-50 border-2 border-tq-orange text-tq-dark text-xs font-black whitespace-nowrap shrink-0 transition active:scale-95 shadow-sm flex items-center gap-1.5">
+                                <span class="w-4 h-4 rounded-md border border-tq-orange bg-white flex items-center justify-center text-[10px] text-transparent">✓</span>
+                                <span>수강 후 클릭</span>
                             </button>
                         </div>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">
@@ -308,8 +323,9 @@
                                 <span class="w-7 h-7 rounded-xl bg-tq-orange text-white font-extrabold text-sm flex items-center justify-center shrink-0">2</span>
                                 <h3 class="text-base sm:text-lg font-extrabold text-gray-900">각 잡는 텐트 설치법</h3>
                             </div>
-                            <button type="button" onclick="toggleComplete('step2', this)" class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-bold whitespace-nowrap shrink-0 transition active:scale-95">
-                                ✓ 배웠어요
+                            <button type="button" onclick="toggleComplete('step2', this)" class="px-3.5 py-2 rounded-xl bg-orange-50 border-2 border-tq-orange text-tq-dark text-xs font-black whitespace-nowrap shrink-0 transition active:scale-95 shadow-sm flex items-center gap-1.5">
+                                <span class="w-4 h-4 rounded-md border border-tq-orange bg-white flex items-center justify-center text-[10px] text-transparent">✓</span>
+                                <span>수강 후 클릭</span>
                             </button>
                         </div>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">
@@ -366,45 +382,98 @@
                                 <span class="w-7 h-7 rounded-xl bg-tq-orange text-white font-extrabold text-sm flex items-center justify-center shrink-0">3</span>
                                 <h3 class="text-base sm:text-lg font-extrabold text-gray-900">매트 깔기 &amp; 침낭 꿀팁</h3>
                             </div>
-                            <button type="button" onclick="toggleComplete('step3', this)" class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-bold whitespace-nowrap shrink-0 transition active:scale-95">
-                                ✓ 배웠어요
+                            <button type="button" onclick="toggleComplete('step3', this)" class="px-3.5 py-2 rounded-xl bg-orange-50 border-2 border-tq-orange text-tq-dark text-xs font-black whitespace-nowrap shrink-0 transition active:scale-95 shadow-sm flex items-center gap-1.5">
+                                <span class="w-4 h-4 rounded-md border border-tq-orange bg-white flex items-center justify-center text-[10px] text-transparent">✓</span>
+                                <span>수강 후 클릭</span>
                             </button>
                         </div>
                         <p class="text-xs text-gray-500 mb-3 leading-relaxed">
                             땅의 차가운 냉기와 습기를 층층이 막아주도록 <strong>아래(1층)부터 순서대로</strong> 버튼을 눌러 깔아보세요!
                         </p>
 
-                        <!-- 인터랙티브 4층 매트 쌓기 -->
-                        <div class="bg-tq-gray rounded-2xl p-4 border border-gray-200">
+                        <!-- 인터랙티브 4층 매트 쌓기 (시각적 & 실질적 효과 강화) -->
+                        <div class="bg-tq-gray rounded-3xl p-4 border border-gray-200">
                             <div class="flex items-center justify-between gap-2 mb-2">
-                                <span id="matStatusText" class="text-xs font-extrabold text-tq-orange">
-                                    👇 버튼을 눌러 1층부터 깔아보세요! (0/4)
+                                <span id="matStatusText" class="text-xs font-extrabold text-tq-orange flex items-center gap-1">
+                                    <span>👇</span> <span>버튼을 눌러 1층부터 깔아보세요! (0/4)</span>
                                 </span>
-                                <button type="button" onclick="resetMats()" class="text-xs font-bold text-gray-500 underline whitespace-nowrap shrink-0">
+                                <button type="button" onclick="resetMats()" class="text-xs font-bold text-gray-500 underline hover:text-gray-700 whitespace-nowrap shrink-0">
                                     다시 깔기
                                 </button>
                             </div>
 
-                            <div class="h-44 flex flex-col justify-end items-center gap-1.5 p-2.5 bg-white rounded-xl border border-gray-100">
-                                <div id="matLayer4" class="hidden w-10/12 py-1.5 px-2 rounded-xl bg-[#D94E28] text-white text-xs font-extrabold text-center shadow-sm pop-in">
-                                    4층: 에어매트 · 자충매트 (폭신폭신!)
+                            <!-- 매트 시각화 스테이지 -->
+                            <div class="min-h-[220px] flex flex-col justify-end items-center gap-2 p-3 bg-gradient-to-b from-blue-50/40 via-white to-stone-50 rounded-2xl border border-gray-200 shadow-inner relative overflow-hidden">
+                                
+                                <!-- 4층: 에어매트 / 자충매트 -->
+                                <div id="matLayer4" class="hidden w-[86%] mat-deploy">
+                                    <div class="p-2.5 rounded-xl bg-gradient-to-r from-rose-500 via-orange-500 to-rose-500 text-white shadow-md border-b-2 border-rose-700 flex items-center justify-between">
+                                        <div class="flex items-center gap-1.5 min-w-0">
+                                            <span class="text-base shrink-0">☁️</span>
+                                            <div class="leading-tight">
+                                                <div class="text-[11px] font-black tracking-tight">4층: 에어매트 / 자충매트</div>
+                                                <div class="text-[10px] text-rose-100 font-semibold">폭신폭신 공기 쿠션층 완성!</div>
+                                            </div>
+                                        </div>
+                                        <span class="text-[9px] bg-black/20 px-2 py-0.5 rounded-full font-bold whitespace-nowrap">최종 완성</span>
+                                    </div>
                                 </div>
-                                <div id="matLayer3" class="hidden w-11/12 py-1 px-2 rounded-lg bg-amber-100 border border-amber-400 text-amber-950 text-xs font-bold text-center pop-in">
-                                    3층: 이너매트 (보들보들 단열)
+
+                                <!-- 3층: 이너매트 -->
+                                <div id="matLayer3" class="hidden w-[91%] mat-deploy">
+                                    <div class="p-2 rounded-xl bg-amber-100 border border-amber-300 text-amber-950 shadow-sm flex items-center justify-between">
+                                        <div class="flex items-center gap-1.5 min-w-0">
+                                            <span class="text-sm shrink-0">🟨</span>
+                                            <div class="leading-tight">
+                                                <div class="text-[11px] font-bold">3층: 이너매트 (발포·단열)</div>
+                                                <div class="text-[9px] text-amber-700">남은 한기 완벽 차단 &amp; 보온</div>
+                                            </div>
+                                        </div>
+                                        <span class="text-[9px] text-amber-700 font-bold whitespace-nowrap">단열층</span>
+                                    </div>
                                 </div>
-                                <div id="matLayer2" class="hidden w-[95%] py-1 px-2 rounded-md bg-orange-200 border border-orange-400 text-orange-950 text-[11px] font-bold text-center pop-in">
-                                    2층: 텐트 바닥 (이너텐트)
+
+                                <!-- 2층: 텐트 바닥 (이너텐트) -->
+                                <div id="matLayer2" class="hidden w-[96%] mat-deploy">
+                                    <div class="p-2 rounded-xl bg-stone-100 border border-stone-300 text-stone-800 shadow-sm flex items-center justify-between">
+                                        <div class="flex items-center gap-1.5 min-w-0">
+                                            <span class="text-sm shrink-0">⛺</span>
+                                            <div class="leading-tight">
+                                                <div class="text-[11px] font-bold">2층: 텐트 바닥 (이너텐트 스킨)</div>
+                                                <div class="text-[9px] text-stone-500">실내 공간의 바닥 스킨 안착</div>
+                                            </div>
+                                        </div>
+                                        <span class="text-[9px] text-stone-500 font-bold whitespace-nowrap">텐트바닥</span>
+                                    </div>
                                 </div>
-                                <div id="matLayer1" class="hidden w-full py-1 px-2 rounded-md bg-stone-600 text-white text-[11px] font-bold text-center pop-in">
-                                    1층: 그라운드시트 (땅 습기·돌멩이 방어!)
+
+                                <!-- 1층: 그라운드시트 -->
+                                <div id="matLayer1" class="hidden w-full mat-deploy">
+                                    <div class="p-2 rounded-xl bg-stone-700 text-white shadow-sm border-b-2 border-stone-900 flex items-center justify-between">
+                                        <div class="flex items-center gap-1.5 min-w-0">
+                                            <span class="text-sm shrink-0">🛡️</span>
+                                            <div class="leading-tight">
+                                                <div class="text-[11px] font-bold">1층: 방수 그라운드시트</div>
+                                                <div class="text-[9px] text-stone-300">땅 습기 차단 &amp; 바닥 돌멩이 보호</div>
+                                            </div>
+                                        </div>
+                                        <span class="text-[9px] bg-stone-800 text-emerald-400 px-2 py-0.5 rounded-full font-bold whitespace-nowrap">방수 100%</span>
+                                    </div>
                                 </div>
-                                <div class="w-full py-1 bg-[#DED2C3] rounded text-[11px] font-bold text-stone-700 text-center">
-                                    🌱 자라섬 캠핑장 땅바닥
+
+                                <!-- 베이스: 자라섬 캠핑장 땅바닥 -->
+                                <div class="w-full py-2.5 px-3 bg-[#D6C7B2] rounded-xl border border-[#B8A68E] text-stone-800 flex items-center justify-between shadow-sm">
+                                    <div class="flex items-center gap-1.5 text-xs font-black">
+                                        <span>🌱</span>
+                                        <span>자라섬 캠핑장 땅바닥</span>
+                                    </div>
+                                    <span class="text-[10px] text-stone-600 font-semibold">습기 &amp; 냉기 발생 구역</span>
                                 </div>
                             </div>
 
-                            <button type="button" onclick="addNextMat()" id="addMatBtn" class="mt-3 w-full py-3 rounded-xl bg-tq-orange hover:bg-tq-dark active:scale-[0.99] text-white font-extrabold text-sm shadow-sm transition">
-                                1층 그라운드시트 깔기
+                            <button type="button" onclick="addNextMat()" id="addMatBtn" class="mt-3 w-full py-3.5 rounded-2xl bg-tq-orange hover:bg-tq-dark active:scale-[0.99] text-white font-black text-sm shadow-md transition flex items-center justify-center gap-2">
+                                <span>🛡️</span>
+                                <span>1층 그라운드시트 깔기</span>
                             </button>
                         </div>
 
@@ -449,8 +518,9 @@
                                 <span class="w-7 h-7 rounded-xl bg-tq-orange text-white font-extrabold text-sm flex items-center justify-center shrink-0">4</span>
                                 <h3 class="text-base sm:text-lg font-extrabold text-gray-900">타프 치는 법 &amp; 팩다운 위치</h3>
                             </div>
-                            <button type="button" onclick="toggleComplete('step4', this)" class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-bold whitespace-nowrap shrink-0 transition active:scale-95">
-                                ✓ 배웠어요
+                            <button type="button" onclick="toggleComplete('step4', this)" class="px-3.5 py-2 rounded-xl bg-orange-50 border-2 border-tq-orange text-tq-dark text-xs font-black whitespace-nowrap shrink-0 transition active:scale-95 shadow-sm flex items-center gap-1.5">
+                                <span class="w-4 h-4 rounded-md border border-tq-orange bg-white flex items-center justify-center text-[10px] text-transparent">✓</span>
+                                <span>수강 후 클릭</span>
                             </button>
                         </div>
                         <p class="text-xs text-gray-500 mb-3 leading-relaxed">
@@ -556,8 +626,9 @@
                                 <span class="w-7 h-7 rounded-xl bg-emerald-600 text-white font-extrabold text-sm flex items-center justify-center shrink-0">5</span>
                                 <h3 class="text-base sm:text-lg font-extrabold text-gray-900">거실 배치 &amp; 친환경 철수</h3>
                             </div>
-                            <button type="button" onclick="toggleComplete('step5', this)" class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-bold whitespace-nowrap shrink-0 transition active:scale-95">
-                                ✓ 배웠어요
+                            <button type="button" onclick="toggleComplete('step5', this)" class="px-3.5 py-2 rounded-xl bg-orange-50 border-2 border-tq-orange text-tq-dark text-xs font-black whitespace-nowrap shrink-0 transition active:scale-95 shadow-sm flex items-center gap-1.5">
+                                <span class="w-4 h-4 rounded-md border border-tq-orange bg-white flex items-center justify-center text-[10px] text-transparent">✓</span>
+                                <span>수강 후 클릭</span>
                             </button>
                         </div>
 
@@ -620,8 +691,9 @@
                                 <span class="w-7 h-7 rounded-full bg-red-500 text-white font-extrabold text-sm flex items-center justify-center shrink-0">A</span>
                                 <h3 class="text-base sm:text-lg font-extrabold text-red-600">가스 중독 사고 예방</h3>
                             </div>
-                            <button type="button" onclick="toggleComplete('safe1', this)" class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-bold whitespace-nowrap shrink-0 transition active:scale-95">
-                                ✓ 약속해요
+                            <button type="button" onclick="toggleComplete('safe1', this)" class="px-3.5 py-2 rounded-xl bg-red-50 border-2 border-red-500 text-red-700 text-xs font-black whitespace-nowrap shrink-0 transition active:scale-95 shadow-sm flex items-center gap-1.5">
+                                <span class="w-4 h-4 rounded-md border border-red-400 bg-white flex items-center justify-center text-[10px] text-transparent">✓</span>
+                                <span>수강 후 클릭</span>
                             </button>
                         </div>
 
@@ -675,8 +747,9 @@
                                 <span class="w-7 h-7 rounded-full bg-tq-orange text-white font-extrabold text-sm flex items-center justify-center shrink-0">B</span>
                                 <h3 class="text-base sm:text-lg font-extrabold text-gray-900">화재 위험 사고 예방</h3>
                             </div>
-                            <button type="button" onclick="toggleComplete('safe2', this)" class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-bold whitespace-nowrap shrink-0 transition active:scale-95">
-                                ✓ 약속해요
+                            <button type="button" onclick="toggleComplete('safe2', this)" class="px-3.5 py-2 rounded-xl bg-orange-50 border-2 border-tq-orange text-tq-dark text-xs font-black whitespace-nowrap shrink-0 transition active:scale-95 shadow-sm flex items-center gap-1.5">
+                                <span class="w-4 h-4 rounded-md border border-tq-orange bg-white flex items-center justify-center text-[10px] text-transparent">✓</span>
+                                <span>수강 후 클릭</span>
                             </button>
                         </div>
 
@@ -722,8 +795,9 @@
                                 <span class="w-7 h-7 rounded-full bg-amber-500 text-white font-extrabold text-sm flex items-center justify-center shrink-0">C</span>
                                 <h3 class="text-base sm:text-lg font-extrabold text-gray-900">기타 생활 안전 &amp; 캠핑 예절</h3>
                             </div>
-                            <button type="button" onclick="toggleComplete('safe3', this)" class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-bold whitespace-nowrap shrink-0 transition active:scale-95">
-                                ✓ 약속해요
+                            <button type="button" onclick="toggleComplete('safe3', this)" class="px-3.5 py-2 rounded-xl bg-orange-50 border-2 border-tq-orange text-tq-dark text-xs font-black whitespace-nowrap shrink-0 transition active:scale-95 shadow-sm flex items-center gap-1.5">
+                                <span class="w-4 h-4 rounded-md border border-tq-orange bg-white flex items-center justify-center text-[10px] text-transparent">✓</span>
+                                <span>수강 후 클릭</span>
                             </button>
                         </div>
 
@@ -826,21 +900,35 @@
                         <span id="completeQuizBtnText">퀴즈풀기 완료하기</span>
                     </button>
 
-                    <!-- 퀴즈 완료 시 나타나는 수료 인증 배지 카드 -->
-                    <div id="badgeCard" class="hidden bg-gradient-to-br from-[#FF8A00] via-[#FF6B00] to-[#E03E00] p-6 rounded-3xl text-white text-center shadow-xl pop-in">
-                        <div class="w-20 h-20 rounded-full bg-white/20 mx-auto flex items-center justify-center text-4xl mb-3 shadow-inner">
-                            🎖️
+                    <!-- 퀴즈 완료 시 나타나는 수료 인증 배지 카드 (요청하신 포스터/거북이 이미지 배경 반영) -->
+                    <div id="badgeCard" class="hidden relative rounded-3xl overflow-hidden shadow-2xl border border-white/30 pop-in bg-cover bg-center min-h-[360px] flex flex-col justify-between" style="background-image: url('https://i.postimg.cc/bv2V32Gh/seukeulinsyas-2026-10-30-172607.png');">
+                        <!-- 가독성 및 거북이 캐릭터 부각을 위한 딤드 그라디언트 -->
+                        <div class="absolute inset-0 bg-gradient-to-b from-black/75 via-black/35 to-black/85"></div>
+
+                        <div class="relative z-10 p-6 text-white text-center">
+                            <!-- 상단 수료 뱃지 -->
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-[11px] font-black tracking-widest text-yellow-300 uppercase mb-3">
+                                <span>🐢</span>
+                                <span>자라섬 캠핑스쿨 수료 완료</span>
+                            </div>
+
+                            <h3 class="text-2xl sm:text-3xl font-black text-white drop-shadow-lg tracking-tight">
+                                자라섬 안전 캠퍼 수료 완료!
+                            </h3>
+
+                            <p class="text-xs sm:text-sm text-gray-100 font-medium mt-3 leading-relaxed drop-shadow-md bg-black/40 backdrop-blur-sm p-3.5 rounded-2xl border border-white/20">
+                                🎉 짝짝짝! 텐트 피칭부터 안전수칙까지 모두 완벽하게 마스터했어요.<br/>
+                                가평 자라섬캠핑장에서 거북이처럼 여유롭고 안전한 캠핑을 즐겨보세요! ⛺
+                            </p>
                         </div>
-                        <p class="text-[11px] font-extrabold tracking-widest text-yellow-200 uppercase">
-                            THANKQ CAMPING SCHOOL CERTIFICATE
-                        </p>
-                        <h3 class="text-2xl font-black mt-1">자라섬 안전 캠퍼 수료 완료!</h3>
-                        <p class="text-xs text-orange-50 mt-2 leading-relaxed">
-                            짝짝짝! 텐트 피칭부터 안전캠핑 수칙까지 모두 완벽하게 마스터했어요.<br/>
-                            가평 자라섬캠핑장에서 즐겁고 안전한 1박 2일 추억을 만들어 봐요! 🙌
-                        </p>
-                        <div class="mt-4 pt-4 border-t border-white/20 flex items-center justify-center gap-2">
-                            <button type="button" onclick="resetQuiz()" class="px-4 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs transition active:scale-95">
+
+                        <!-- 하단 컨트롤 영역 -->
+                        <div class="relative z-10 p-5 bg-black/50 backdrop-blur-md border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+                            <div class="text-xs text-gray-200">
+                                <span class="text-yellow-400 font-extrabold">🏆 교육 이수 인증</span>
+                                <p class="text-[11px] text-gray-300">자라섬캠핑장 × 땡큐캠핑</p>
+                            </div>
+                            <button type="button" onclick="resetQuiz()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-extrabold text-xs transition active:scale-95 border border-white/30 whitespace-nowrap">
                                 🔄 퀴즈 다시 풀어보기
                             </button>
                         </div>
@@ -998,14 +1086,21 @@
 
         function toggleComplete(stepId, btnEl) {
             const isSafety = stepId.indexOf('safe') === 0;
+            const isSafe1 = stepId === 'safe1';
+
             if (completedSteps.has(stepId)) {
                 completedSteps.delete(stepId);
-                btnEl.className = "px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-bold whitespace-nowrap shrink-0 transition active:scale-95";
-                btnEl.textContent = isSafety ? "✓ 약속해요" : "✓ 배웠어요";
+                if (isSafe1) {
+                    btnEl.className = "px-3.5 py-2 rounded-xl bg-red-50 border-2 border-red-500 text-red-700 text-xs font-black whitespace-nowrap shrink-0 transition active:scale-95 shadow-sm flex items-center gap-1.5";
+                    btnEl.innerHTML = '<span class="w-4 h-4 rounded-md border border-red-400 bg-white flex items-center justify-center text-[10px] text-transparent">✓</span><span>수강 후 클릭</span>';
+                } else {
+                    btnEl.className = "px-3.5 py-2 rounded-xl bg-orange-50 border-2 border-tq-orange text-tq-dark text-xs font-black whitespace-nowrap shrink-0 transition active:scale-95 shadow-sm flex items-center gap-1.5";
+                    btnEl.innerHTML = '<span class="w-4 h-4 rounded-md border border-tq-orange bg-white flex items-center justify-center text-[10px] text-transparent">✓</span><span>수강 후 클릭</span>';
+                }
             } else {
                 completedSteps.add(stepId);
-                btnEl.className = "px-3 py-1.5 rounded-full bg-tq-orange text-white text-xs font-extrabold whitespace-nowrap shrink-0 shadow-sm transition active:scale-95";
-                btnEl.textContent = "✓ 완료!";
+                btnEl.className = "px-3.5 py-2 rounded-xl bg-emerald-600 border-2 border-emerald-600 text-white text-xs font-black whitespace-nowrap shrink-0 shadow-sm transition active:scale-95 flex items-center gap-1.5";
+                btnEl.innerHTML = '<span class="w-4 h-4 rounded-md bg-white text-emerald-600 flex items-center justify-center text-[11px] font-black leading-none">✓</span><span>수강완료</span>';
             }
             updateProgressBar();
         }
